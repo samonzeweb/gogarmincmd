@@ -4,8 +4,6 @@ import (
   "os"
   "fmt"
   "strconv"
-  "net/http"
-  "io/ioutil"
   "github.com/samonzeweb/gogarmincmd/tcx"
 )
 
@@ -13,11 +11,8 @@ import (
 func main() {
   idActivity := activityInArgs()
 
-  tcxContent, err := getTCX(idActivity)
-  if err != nil {
-    panic(err)
-  }
-  tcxData, err  := tcx.ParseTCX(tcxContent)
+
+  tcxData, err  := tcx.GetTCX(idActivity)
   if err != nil {
     panic(err)
   }
@@ -49,22 +44,4 @@ func printUsageAndQuit() {
   // TODO utiliser basename du programme (pas tout le chemin)
   fmt.Fprintf(os.Stderr, "usage : %v id_activity\n", os.Args[0])
   os.Exit(1)
-}
-
-//---
-
-const tmplURLActivity = "http://connect.garmin.com/proxy/activity-service-1.1/tcx/activity/"
-
-func getTCX(idActivity int64) ([]byte, error) {
-  url := fmt.Sprintf("%s%d", tmplURLActivity, idActivity)
-  resp, err := http.Get(url)
-  if err != nil {
-    return nil, err
-  }
-  defer resp.Body.Close()
-  xml, err := ioutil.ReadAll(resp.Body)
-  if err != nil {
-    return nil, err
-  }
-  return xml, nil
 }

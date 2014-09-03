@@ -22,7 +22,7 @@ type TCXLap struct {
   MaximumHeartRateBpm float32   `xml:"MaximumHeartRateBpm>Value"`
 }
 
-func ParseTCX(xmlTCX []byte) (*TCXTrainingCenterDatabase, error) {
+func parseTCX(xmlTCX []byte) (*TCXTrainingCenterDatabase, error) {
   var tcx TCXTrainingCenterDatabase
   err := xml.Unmarshal(xmlTCX, &tcx)
   if err != nil {
