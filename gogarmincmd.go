@@ -4,12 +4,11 @@ import (
   "flag"
   "os"
   "fmt"
-  "strconv"
   "github.com/samonzeweb/gogarmincmd/tcx"
 )
 
 type CmdArguments struct {
-    idActivity  int64
+    idActivity  string
     fcMax       int
 }
 
@@ -34,15 +33,11 @@ func getCommandLineArguments() *CmdArguments {
                         fcMax: *fcmax }
 }
 
-func getIdActivity() int64 {
+func getIdActivity() string {
   if len(flag.Args()) != 1 {
     printUsageAndQuit()
   }
-  idActivity, err := strconv.ParseInt(flag.Args()[0], 10, 64)
-  if err != nil {
-    printUsageAndQuit()
-  }
-  return idActivity
+  return flag.Arg(0)
 }
 
 func printUsageAndQuit() {
