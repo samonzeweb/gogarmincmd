@@ -16,10 +16,10 @@ type TCXTrainingCenterDatabase struct {
 
 type TCXLap struct {
   XMLName             xml.Name  `xml:"Lap"`
-  TotalTimeSeconds    float32   `xml:"TotalTimeSeconds"`
-  DistanceMeters      float32   `xml:"DistanceMeters"`
-  AverageHeartRateBpm float32   `xml:"AverageHeartRateBpm>Value"`
-  MaximumHeartRateBpm float32   `xml:"MaximumHeartRateBpm>Value"`
+  TotalTimeSeconds    float64   `xml:"TotalTimeSeconds"`
+  DistanceMeters      float64   `xml:"DistanceMeters"`
+  AverageHeartRateBpm int       `xml:"AverageHeartRateBpm>Value"`
+  MaximumHeartRateBpm int       `xml:"MaximumHeartRateBpm>Value"`
 }
 
 func parseTCX(xmlTCX []byte) (*TCXTrainingCenterDatabase, error) {
