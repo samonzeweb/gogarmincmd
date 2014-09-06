@@ -41,9 +41,17 @@ func summary(activity tcx.TCXActivity) (totalDistance float64, totalTime float64
 }
 
 func formattedRun(distance float64, duration float64, avgFC int, maxFC int, arguments *CmdArguments) string {
-  return fmt.Sprintf("%0.2f km - %s - %s - FC %s Max %s\n",
-                     distance/1000, formattedDuration(duration) , formattedPace(distance, duration),
+  return fmt.Sprintf("%s - %s - %s - FC %s Max %s\n",
+                     formattedDistance(distance), formattedDuration(duration) , formattedPace(distance, duration),
                      formattedFC(avgFC, arguments.fcMax), formattedFC(maxFC, arguments.fcMax))
+}
+
+func formattedDistance(distance float64) string {
+  if distance >= 1000 {
+    return fmt.Sprintf("%0.2f km", distance/1000)
+  } else {
+    return fmt.Sprintf(" %03.0f m ", distance)
+  }
 }
 
 // the value is a int because no more precision is needed
