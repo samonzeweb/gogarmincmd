@@ -16,7 +16,7 @@ func displayActivities(tcxData *tcx.TCXTrainingCenterDatabase, arguments *CmdArg
     fmt.Println("TOTAL :", formattedRun(totalDistance, totalTime, avgFC, maxFC, arguments))
 
     for index, lap := range(activity.Laps) {
-      fmt.Fprintf(os.Stdout,"Partie %02d : %s", index,
+      fmt.Fprintf(os.Stdout,"Partie %02d : %s", index+1,
                   formattedRun(lap.DistanceMeters, lap.TotalTimeSeconds, lap.AverageHeartRateBpm, lap.MaximumHeartRateBpm, arguments))
     }
   }
